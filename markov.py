@@ -20,6 +20,11 @@ def update_json(channel):
     with open('markov.json', 'wb') as outfile:
         json.dump(new_markov, outfile)
 
+def read_json():
+    with open('markov.json') as markov_json:
+        markov = json.load(markov_json)
+    return markov
+
 def get_markov_obj(markov, msgs):
     markov['latest_ts'] = msgs[0]['ts']
     for msg in msgs:
