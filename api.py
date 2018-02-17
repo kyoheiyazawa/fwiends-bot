@@ -41,6 +41,12 @@ def get_recent_msgs(channel, oldest):
     }
     return slack_request('groups.history', options)['messages']
 
+def get_user_info(user):
+    options = {
+        'user': user
+    }
+    return slack_request('users.info', options)['user']
+
 def revoke_token():
     params = {
         'token': config.token
