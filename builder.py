@@ -40,5 +40,5 @@ def build(count):
         prev_user = msg['user_id']
     render_data['user_block'].append(append_block)
     html = template.render(data=render_data)
-    with io.open('jinja2_chat.html', mode='w', encoding='utf-8') as outfile:
+    with io.open('bot_chat.html', mode='w', encoding='utf-8') as outfile:
         outfile.write(unicode(html))

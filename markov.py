@@ -14,7 +14,7 @@ def init_json(channel, count, iterations):
         outfile.write(unicode(data))
 
 def update_json(channel):
-    with open('markov.json') as markov_json:
+    with io.open('markov.json', mode='r', encoding='utf-8') as markov_json:
         markov = json.load(markov_json)
     messages = api.get_recent_msgs(channel, markov['latest_ts'])
     if messages:        
@@ -22,6 +22,9 @@ def update_json(channel):
         with io.open('markov.json', 'w', encoding='utf-8') as outfile:
             data = json.dumps(new_markov, ensure_ascii=False, encoding='utf-8')
             outfile.write(unicode(data))
+        return 'Update complete - {0} messages added to markov.json.'.format(len(messages))
+    else:
+        return 'No new messages - markov.json unchanged.'
 
 def read_json():
     with io.open('markov.json', mode='r', encoding='utf-8') as markov_json:
