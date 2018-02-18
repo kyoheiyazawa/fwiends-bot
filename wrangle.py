@@ -49,9 +49,9 @@ def format_quotes(message):
 def build_text(markov_dict, user):
     # Vary prevalence of bigrams based on user post frequency
     initial_types_mapping = {
-        'high': ['unigrams', 'unigrams', 'bigrams', 'bigrams', 'bigrams'],
-        'med': ['unigrams','bigrams'],
-        'low': ['unigrams', 'unigrams', 'bigrams']                
+        'high': ['unigrams', 'bigrams'],
+        'med': ['unigrams', 'unigrams', 'bigrams'],
+        'low': ['unigrams', 'unigrams', 'unigrams', 'bigrams']                
     }
     user_freq = get_user_freq_category(user, markov_dict['user_counts'])
     initial_types = initial_types_mapping[user_freq]
