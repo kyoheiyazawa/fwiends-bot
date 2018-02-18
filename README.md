@@ -1,14 +1,25 @@
-Dependencies managed using `pipenv`
-
+Dependencies managed using `pipenv`, get it using `pip`:
 ```python
 pip install --user pipenv
-pipenv install
-pipenv run python fwiends_bot.py
 ```
 
+Install dependencies:
+```python
+pipenv install
+```
 
-Example config.py:
+Create config.py with Channel ID and token:
 ```python
 channel = 'AA999999'
 token = 'zzzz-0000000'
+```
+
+Build markov.json:
+```bash
+./setup.sh
+```
+
+Run the bot and generate html output:
+```bash
+./run.sh
 ```
