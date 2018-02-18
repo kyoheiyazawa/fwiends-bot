@@ -2,6 +2,8 @@ Dependencies managed using `pipenv`, get it using `pip`:
 ```python
 pip install --user pipenv
 ```
+You might have to modify your PATH to get this working:
+http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
 Install dependencies:
 ```python

@@ -1,3 +1,4 @@
+import copy
 import io
 import markov
 import wrangle
@@ -32,13 +33,13 @@ def build(count):
         user = users[msg['user_id']]
         if msg['user_id'] != prev_user:
             if append_block:
-                render_data['user_block'].append(append_block)
+                render_data['user_block'].append(copy.deepcopy(append_block))
             append_block['name'] = user.name
             append_block['avatar'] = user.avatar_72
             append_block['msgs'] = []
         append_block['msgs'].append(msg['text'])
         prev_user = msg['user_id']
-    render_data['user_block'].append(append_block)
+    render_data['user_block'].append(copy.deepcopy(append_block))
     html = template.render(data=render_data)
     with io.open('bot_chat.html', mode='w', encoding='utf-8') as outfile:
         outfile.write(unicode(html))
