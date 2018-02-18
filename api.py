@@ -28,7 +28,6 @@ def get_msgs(channel, count, iter=1):
             messages += response
             latest = response[-1]['ts']
         else:
-            print messages
             return messages
         options['latest'] = latest
     return messages
