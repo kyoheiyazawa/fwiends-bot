@@ -1,5 +1,5 @@
 import api
-import config
+import io
 import json
 
 blank_markov = {
@@ -9,8 +9,9 @@ blank_markov = {
 
 def init_json(channel, count, iterations):
     messages = api.get_msgs(channel, count, iterations)
-    with codecs.open('markov.json', 'wb', encoding='utf-8') as outfile:
-        json.dump(get_markov_obj(blank_markov, messages), outfile)
+    with io.open('markov.json', mode='w', encoding='utf-8') as outfile:
+        data = json.dumps(get_markov_obj(blank_markov, messages), ensure_ascii=False, encoding='utf-8')
+        outfile.write(unicode(data))
 
 def update_json(channel):
     with open('markov.json') as markov_json:
@@ -18,22 +19,23 @@ def update_json(channel):
     messages = api.get_recent_msgs(channel, markov['latest_ts'])
     if messages:        
         new_markov = get_markov_obj(markov, messages)
-        with open('markov.json', 'wb') as outfile:
-            json.dump(new_markov, outfile)
+        with io.open('markov.json', 'w', encoding='utf-8') as outfile:
+            data = json.dumps(new_markov, ensure_ascii=False, encoding='utf-8')
+            outfile.write(unicode(data))
 
 def read_json():
-    with open('markov.json') as markov_json:
+    with io.open('markov.json', mode='r', encoding='utf-8') as markov_json:
         markov = json.load(markov_json)
     return markov
 
 def get_markov_obj(markov, msgs):
     markov['latest_ts'] = msgs[0]['ts']
     for msg in msgs:
-        if 'subtype' in msg:
+        if u'subtype' in msg:
             continue
-        if 'http' in msg['text']:
+        if u'http' in msg['text']:
             continue
-        if 'iOS>' in msg['text']:
+        if u'iOS>' in msg['text']:
             continue
         user = msg['user']
 
