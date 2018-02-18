@@ -1,6 +1,4 @@
-import config
-import markov
+import builder
 
-#init_json(config.channel, 2, 9)
-markov.update_json(config.channel)
-
+if __name__ == "__main__":
+    builder.build(4)

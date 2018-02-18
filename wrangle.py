@@ -68,7 +68,7 @@ def build_text(markov_dict, user):
             seed = next
         else:
             words = seed.split()
-            seed = '{0} {1}'.format(words[-1], next)
+            seed = u'{0} {1}'.format(words[-1], next)
         message_words.append(next)
     message = ' '.join(message_words)
     return format_quotes(message)

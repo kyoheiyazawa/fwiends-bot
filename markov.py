@@ -9,16 +9,17 @@ blank_markov = {
 
 def init_json(channel, count, iterations):
     messages = api.get_msgs(channel, count, iterations)
-    with open('markov.json', 'wb') as outfile:
+    with codecs.open('markov.json', 'wb', encoding='utf-8') as outfile:
         json.dump(get_markov_obj(blank_markov, messages), outfile)
 
 def update_json(channel):
     with open('markov.json') as markov_json:
         markov = json.load(markov_json)
-    messages = api.get_recent_msgs(channel, markov['latest_ts'])        
-    new_markov = get_markov_obj(markov, messages)
-    with open('markov.json', 'wb') as outfile:
-        json.dump(new_markov, outfile)
+    messages = api.get_recent_msgs(channel, markov['latest_ts'])
+    if messages:        
+        new_markov = get_markov_obj(markov, messages)
+        with open('markov.json', 'wb') as outfile:
+            json.dump(new_markov, outfile)
 
 def read_json():
     with open('markov.json') as markov_json:
